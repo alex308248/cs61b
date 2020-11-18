@@ -100,7 +100,9 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         IntList newlistnode;
         IntList originnode;
-        if(A == null) {
+        if(A == null && B == null) {
+            return A;
+        } else if(A == null) {
             newlistnode = new IntList(B.first, null);
             originnode = B.rest;
         } else {

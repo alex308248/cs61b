@@ -35,27 +35,21 @@ public class NBody {
 		String filename = args[2];
 		double radius = readRadius(filename);
 		Planet[] bodies = readPlanets(filename);
+
 		String background = "images/starfield.jpg";
 		StdDraw.enableDoubleBuffering();
 		StdDraw.setScale(-2*radius, 2*radius);
 		StdDraw.clear();
-        StdDraw.picture(0, 0, background);
-        for(int i = 0; i < bodies.length; i++) {
-        	bodies[i].draw();
-        }
-        StdDraw.show();
         for(double time = 0; time < T; time = time + dt) {
         	double[] xForce = new double[bodies.length];
         	double[] yForce = new double[bodies.length];
         	for(int i = 0; i < bodies.length; i++) {
         		xForce[i] = bodies[i].calcNetForceExertedByX(bodies);
-        		yForce[i] = bodies[i].calcNetForceExertedByX(bodies);
+        		yForce[i] = bodies[i].calcNetForceExertedByY(bodies);
         	}
         	for(int i = 0; i < bodies.length; i++) {
         	    bodies[i].update(dt, xForce[i], yForce[i]);   
         	}
-        	StdDraw.setScale(-2*radius, 2*radius);
-    		StdDraw.clear();
             StdDraw.picture(0, 0, background);
             for(int i = 0; i < bodies.length; i++) {
         	    bodies[i].draw();

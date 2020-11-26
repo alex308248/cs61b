@@ -12,7 +12,7 @@ public class NBody {
 		double radius = in.readDouble();
 		return radius;
 	}
-	public static Planet [] readPlanets(String filename) {
+	public static Planet [] readBodies(String filename) {
 		In in = new In(filename);
 		int numbers = in.readInt();
 		double radius = in.readDouble();

@@ -1,9 +1,9 @@
 public class Exercise2 {
    public static int max(int[] m) {
-      int Max=0;
-      for (int i=0;i<m.length;i++) {
-         if (m[i]>Max)
-         Max=m[i];
+      int Max = 0;
+      for (int i = 0; i < m.length; i++) {
+         if (m[i] > Max)
+            Max = m[i];
       }
       return Max;
    }

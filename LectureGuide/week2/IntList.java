@@ -30,7 +30,8 @@ public class IntList {
 	public int get(int i) {
             if (i == 0) {
                 return this.first;
-            } return (get(i - 1));
+            } 
+			return (this.rest.get(i - 1));
 	}
 
 	public static void main(String[] args) {
@@ -39,7 +40,7 @@ public class IntList {
 		L = new IntList(5, L);
 
 		System.out.println(L.iterativeSize());
-		System.out.println(L.get(1));
+		System.out.println(L.get(2));
 		System.out.println(L.size());
 	}
 } 

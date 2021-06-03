@@ -31,8 +31,9 @@ public class LinkedListDeque<T> {
             return;
         }
         Node originfirst = sentinel.right;
-        Node a = new Node(null, item, originfirst);
+        Node a = new Node(originfirst.left, item, originfirst);
         sentinel.right = a;
+        originfirst.left.right = a;
         originfirst.left = a;
     }
 
@@ -133,14 +134,14 @@ public class LinkedListDeque<T> {
         return null;
     }
 
-    public T Recursive(int index, Node a) {
+    private T recursive(int index, Node a) {
         if (index == 0) {
             return a.val;
         }
-        return Recursive(index - 1, a.right);
+        return recursive(index - 1, a.right);
     }
 
     public T getRecursive(int index) {
-        return Recursive(index, sentinel.right);
+        return recursive(index, sentinel.right);
     }
 }

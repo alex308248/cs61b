@@ -36,6 +36,15 @@ public class LinkedListDequeTest {
 		for (int i = 0; i < 16; i += 1) {
 			System.out.print(lld1.getRecursive(i) + " ");
 		}
+		System.out.println();
+		for (int i = 0; i < 16; i += 1) {
+			if (i < 8) {
+				lld1.removeFirst();
+			} else {
+				lld1.removeLast();
+			}
+			lld1.printDeque();
+		}
 	}
 	/* Prints a nice message based on whether a test passed. 
 	 * The \n means newline. */
@@ -106,5 +115,6 @@ public class LinkedListDequeTest {
 		System.out.println("Running tests.\n");
 		//addIsEmptySizeTest();
 		//addRemoveTest();
+		addTest();
 	}
 }

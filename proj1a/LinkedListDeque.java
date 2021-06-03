@@ -1,36 +1,23 @@
-public class LinkedListDeque <T>{
+public class LinkedListDeque<T> {
     private class Node {
-        public Node left;
-        public T val;
-        public Node right;
+        private Node left;
+        private T val;
+        private Node right;
 
-        public Node(Node L, T i, Node R) {
+        Node(Node L, T i, Node R) {
             left = L;
             val = i;
             right = R;
         }
 
-        public Node(T i) {
-            left = null;
-            val = i;
-            right = null;
-        }
     }
 
-    public int size;
-    public Node sentinel;
+    private int size;
+    private Node sentinel;
 
     public LinkedListDeque() {
-        sentinel = new Node(null, null,null);
-        size = 0;
-    }
-
-    public LinkedListDeque(T item) {
         sentinel = new Node(null, null, null);
-        sentinel.right = new Node(null, item, null);
-        sentinel.right.left = sentinel.right;
-        sentinel.right.right = sentinel.right;
-        size = 1;
+        size = 0;
     }
 
     // Adds an item of type T to the front of the deque.
@@ -43,33 +30,32 @@ public class LinkedListDeque <T>{
             a.left = a;
             return;
         }
-        Node origin_first = sentinel.right;
-        Node a = new Node(null, item, origin_first);
+        Node originfirst = sentinel.right;
+        Node a = new Node(null, item, originfirst);
         sentinel.right = a;
-        origin_first.left = a;
+        originfirst.left = a;
     }
 
     //Adds an item of type T to the back of the deque.
     public void addLast(T item) {
         size += 1;
         if (sentinel.right == null) {
-            Node a = new Node(null,item, null);
+            Node a = new Node(null, item, null);
             sentinel.right = a;
             a.left = a;
             a.right = a;
             return;
-        }
-        else if (sentinel.right.right == sentinel.right) {
-            Node origin_last = sentinel.right.left;
-            Node a = new Node(origin_last, item, sentinel.right);
-            origin_last.right = a;
-            origin_last.left = a;
+        } else if (sentinel.right.right == sentinel.right) {
+            Node originlast = sentinel.right.left;
+            Node a = new Node(originlast, item, sentinel.right);
+            originlast.right = a;
+            originlast.left = a;
             return;
         }
-        Node origin_last = sentinel.right.left;
-        Node a = new Node(origin_last, item, sentinel.right);
+        Node originlast = sentinel.right.left;
+        Node a = new Node(originlast, item, sentinel.right);
         sentinel.right.left = a;
-        origin_last.right = a;
+        originlast.right = a;
     }
 
     //Returns true if deque is empty, false otherwise.
@@ -77,9 +63,7 @@ public class LinkedListDeque <T>{
         if (size == 0) {
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     //Returns the number of items in the deque.
@@ -102,13 +86,11 @@ public class LinkedListDeque <T>{
         Node a = sentinel.right;
         if (a == null) {
             return null;
-        }
-        else if (a.right == a) {
+        } else if (a.right == a) {
             sentinel.right = null;
             size = 0;
             return a.val;
-        }
-        else {
+        } else {
             size -= 1;
             sentinel.right = a.right;
             a.right.left = a.left;
@@ -122,13 +104,11 @@ public class LinkedListDeque <T>{
         Node a = sentinel.right;
         if (a == null) {
             return null;
-        }
-        else if (a.right == a) {
+        } else if (a.right == a) {
             sentinel.right = null;
             size = 0;
             return a.val;
-        }
-        else {
+        } else {
             size -= 1;
             Node out = a.left;
             a.left = out.left;
@@ -137,7 +117,8 @@ public class LinkedListDeque <T>{
         }
     }
 
-    //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
+    // Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
+    // If no such item exists, returns null. Must not alter the deque!
     public T get(int index) {
         Node a = sentinel.right;
         if (index > size) {
@@ -145,11 +126,10 @@ public class LinkedListDeque <T>{
         }
         for (int i = 0; i < index; i += 1) {
             if (index - 1 == i) {
-               return a.val;
+                return a.val;
             }
             a = a.right;
         }
         return null;
     }
-
 }

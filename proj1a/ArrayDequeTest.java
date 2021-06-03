@@ -1,5 +1,5 @@
 /** Performs some basic linked list tests. */
-public class LinkedListDequeTest {
+public class ArrayDequeTest {
 
 	/* Utility method for printing out empty checks. */
 	public static boolean checkEmpty(boolean expected, boolean actual) {
@@ -29,6 +29,24 @@ public class LinkedListDequeTest {
 		}
 	}
 
+	public static void addTest() {
+		System.out.println("Running add/isEmpty/Size test.");
+		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+
+		ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
+
+		for (int i = 0; i < 16; i += 1) {
+			if (i < 8) {
+				lld1.addLast(i);
+			} else {
+				lld1.addFirst(i);
+			}
+		}
+		lld1.printDeque();
+		for (int i = 0; i < 16; i += 1) {
+			System.out.print(lld1.get(i) + " ");
+		}
+	}
 	/** Adds a few things to the list, checking isEmpty() and size() are correct, 
 	  * finally printing the results. 
 	  *
@@ -37,7 +55,7 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/isEmpty/Size test.");
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
-		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+		ArrayDeque<String> lld1 = new ArrayDeque<String>();
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
@@ -68,7 +86,7 @@ public class LinkedListDequeTest {
 
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
-		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
@@ -87,6 +105,7 @@ public class LinkedListDequeTest {
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		//addIsEmptySizeTest();
-		addRemoveTest();
+		//addRemoveTest();
+		addTest();
 	}
 } 

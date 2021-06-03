@@ -1,8 +1,8 @@
-public class ArrayDeque <T>{
-    public int size;
-    public T[] items;
-    public int nextFirst;
-    public int nextLast;
+public class ArrayDeque<T> {
+    private int size;
+    private T[] items;
+    private int nextFirst;
+    private int nextLast;
 
     public ArrayDeque() {
         nextFirst = 4;
@@ -11,34 +11,36 @@ public class ArrayDeque <T>{
         size = 0;
     }
 
-    public ArrayDeque(T item) {
-        items = (T[]) new Object[8];
-        nextFirst = 4;
-        nextLast = 5;
-        items[nextFirst] = item;
-        nextFirst -= 1;
-        size = 1;
-    }
-
-    private  void resize(int capacity, int first_or_last) {
+    private  void resize(int capacity, int firstorlast) {
         T[] a = (T[]) new Object[capacity];
 
-        // add first
-        if (first_or_last == 1) {
+        if (firstorlast == 1) { // add first
             System.arraycopy(items, 0, a, 0, nextLast);
-            System.arraycopy(items, nextFirst, a, a.length - items.length + nextFirst, items.length - nextFirst);
+            System.arraycopy(items, nextFirst, a,
+                    a.length - items.length + nextFirst, items.length - nextFirst);
             nextFirst = a.length - items.length + nextFirst - 1;
             items = a;
-        }
-        // add last
-        else if (first_or_last == 0) {
+        } else if (firstorlast == 0) { // add last
             System.arraycopy(items, 0, a, 0, nextLast + 1);
-            if (nextFirst + 1 < items.length ) {
-                System.arraycopy(items, nextFirst + 1, a, a.length - items.length + nextFirst + 1, items.length - nextFirst - 1);
+            if (nextFirst + 1 < items.length) {
+                System.arraycopy(items, nextFirst + 1, a,
+                        a.length - items.length + nextFirst + 1, items.length - nextFirst - 1);
             }
             nextFirst = a.length - items.length + nextFirst;
             nextLast = nextLast + 1;
             items = a;
+        } else if (firstorlast == 3) { // remove
+            if (nextFirst > nextLast) {
+                if (nextFirst + 1 < items.length) {
+                    System.arraycopy(items, nextFirst + 1, a, 0, items.length - 1 - nextFirst);
+                }
+                System.arraycopy(items, 0, a, items.length - 1 - nextFirst, nextLast);
+            } else {
+                System.arraycopy(items, nextFirst + 1, a, 0, size);
+            }
+            items = a;
+            nextFirst = items.length - 1;
+            nextLast = size;
         }
     }
 
@@ -47,12 +49,10 @@ public class ArrayDeque <T>{
         items[nextFirst] = item;
         size += 1;
         if (size == items.length) {
-            resize(size*2,1);
-        }
-        else if (nextFirst == 0) {
+            resize(size * 2, 1);
+        } else if (nextFirst == 0) {
             nextFirst = items.length - 1;
-        }
-        else {
+        } else {
             nextFirst -= 1;
         }
     }
@@ -62,12 +62,10 @@ public class ArrayDeque <T>{
         items[nextLast] = item;
         size += 1;
         if (size == items.length) {
-            resize(size*2, 0);
-        }
-        else if (nextLast == items.length - 1) {
+            resize(size * 2, 0);
+        } else if (nextLast == items.length - 1) {
             nextLast = 0;
-        }
-        else {
+        } else {
             nextLast += 1;
         }
     }
@@ -77,9 +75,7 @@ public class ArrayDeque <T>{
         if (size == 0) {
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     //Returns the number of items in the deque.
@@ -97,8 +93,7 @@ public class ArrayDeque <T>{
                 System.out.print(items[i] + " ");
             }
             System.out.println();
-        }
-        else {
+        } else {
             for (int i = nextFirst + 1; i < nextLast; i += 1) {
                 System.out.print(items[i] + " ");
             }
@@ -108,55 +103,59 @@ public class ArrayDeque <T>{
 
     //Removes and returns the item at the front of the deque. If no such item exists, returns null.
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+
         size -= 1;
-        if(nextFirst == items.length - 1) {
+        T ret;
+        if (nextFirst == items.length - 1) {
             nextFirst = 0;
-            return items[0];
-        }
-        else {
+            ret = items[0];
+        } else {
             nextFirst += 1;
-            return items[nextFirst];
+            ret = items[nextFirst];
         }
+
+        if (size < items.length / 4) {
+            resize(items.length / 2, 3);
+        }
+        return ret;
     }
 
     //Removes and returns the item at the back of the deque. If no such item exists, returns null.
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+
         size -= 1;
+        T ret;
         if (nextLast == 0) {
             nextLast = items.length - 1;
-            return items[items.length - 1];
-        }
-        else {
+            ret = items[items.length - 1];
+        } else {
             nextLast -= 1;
-            return items[nextLast];
+            ret = items[nextLast];
         }
+
+        if (size < items.length / 4) {
+            resize(items.length / 2, 3);
+        }
+        return ret;
     }
 
-    //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
+    // Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
+    // If no such item exists, returns null. Must not alter the deque!
     public T get(int index) {
-        if (nextLast <= nextFirst) {
-            for (int i = 0; i < size; i += 1) {
-                if (index == 0) {
-                    return items[i];
-                }
-                index -= 1;
+        if (nextLast > nextFirst) {
+            return items[nextFirst + index + 1];
+        } else {
+            if (nextFirst + index + 1 < items.length) {
+                return items[nextFirst + index + 1];
+            } else {
+                return items[index - items.length  + 1 + nextFirst];
             }
-            for (int i = 0; i < nextLast; i += 1) {
-                if (index == 0) {
-                    return items[i];
-                }
-                index -= 1;
-            }
-            return null;
-        }
-        else {
-            for (int i = nextFirst + 1; i < nextLast; i += 1) {
-                if (index == 0) {
-                    return items[i];
-                }
-                index -= 1;
-            }
-            return null;
         }
     }
 }

@@ -1,7 +1,7 @@
 /** Performs some basic linked list tests. */
-public class LinkedListDequeTest {
 
-	/* Utility method for printing out empty checks. */
+
+public class LinkedListDequeTest {
 	public static boolean checkEmpty(boolean expected, boolean actual) {
 		if (expected != actual) {
 			System.out.println("isEmpty() returned " + actual + ", but expected: " + expected);
@@ -19,6 +19,24 @@ public class LinkedListDequeTest {
 		return true;
 	}
 
+	public static void addTest() {
+		System.out.println("Running add/isEmpty/Size test.");
+		System.out.println("Make sure to uncomment the lines below.");
+
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+
+		for (int i = 0; i < 16; i += 1) {
+			if (i < 8) {
+				lld1.addLast(i);
+			} else {
+				lld1.addFirst(i);
+			}
+		}
+		lld1.printDeque();
+		for (int i = 0; i < 16; i += 1) {
+			System.out.print(lld1.getRecursive(i) + " ");
+		}
+	}
 	/* Prints a nice message based on whether a test passed. 
 	 * The \n means newline. */
 	public static void printTestStatus(boolean passed) {
@@ -35,7 +53,7 @@ public class LinkedListDequeTest {
 	  * && is the "and" operation. */
 	public static void addIsEmptySizeTest() {
 		System.out.println("Running add/isEmpty/Size test.");
-		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+		System.out.println("Make sure to uncomment the lines below.");
 
 		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
@@ -66,7 +84,7 @@ public class LinkedListDequeTest {
 
 		System.out.println("Running add/remove test.");
 
-		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+		System.out.println("Make sure to uncomment the lines below.");
 
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		// should be empty 
@@ -87,6 +105,6 @@ public class LinkedListDequeTest {
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		//addIsEmptySizeTest();
-		addRemoveTest();
+		//addRemoveTest();
 	}
-} 
+}

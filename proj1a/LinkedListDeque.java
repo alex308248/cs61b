@@ -132,4 +132,15 @@ public class LinkedListDeque<T> {
         }
         return null;
     }
+
+    public T Recursive(int index, Node a) {
+        if (index == 0) {
+            return a.val;
+        }
+        return Recursive(index - 1, a.right);
+    }
+
+    public T getRecursive(int index) {
+        return Recursive(index, sentinel.right);
+    }
 }

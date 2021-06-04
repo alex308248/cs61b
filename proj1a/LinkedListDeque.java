@@ -126,7 +126,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         for (int i = 0; i <= index; i += 1) {
-            if (index - 1 == i) {
+            if (index == i) {
                 return a.val;
             }
             a = a.right;

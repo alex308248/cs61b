@@ -7,11 +7,10 @@ public class OffByN implements CharacterComparator {
     public boolean equalChars(char x, char y) {
         int a = x;
         int b = y;
-        if(b-a >0 && b-a <= n || a-b > 0 && a-b <= n) {
+        if (b - a > 0 && b - a <= n || a - b > 0 && a - b <= n) {
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     }
 }

@@ -37,30 +37,36 @@ public class TestPalindrome {
         String word4 = "";
         boolean actual4 = true;
         assertEquals(palindrome.isPalindrome(word4), actual4);
-    }
-    /*
-    @Test
-    public void testisPalindrome1() {
+
+
         CharacterComparator cc = new OffByOne();
+        String word10 = "abcqcba";
+        boolean actual10 = false;
+        assertEquals(palindrome.isPalindrome(word10, cc), actual10);
 
-        String word0 = "abcqcba";
-        boolean actual0 = true;
-        assertEquals(palindrome.isPalindrome(word0, cc), actual0);
+        String word11 = "acddb";
+        boolean actual11 = true;
+        assertEquals(palindrome.isPalindrome(word11, cc), actual11);
 
-        String word1 = "abcqqcba";
-        boolean actual1 = true;
-        assertEquals(palindrome.isPalindrome(word1, cc), actual1);
+        String word12 = "abcqqcba";
+        boolean actual12 = false;
+        assertEquals(palindrome.isPalindrome(word12, cc), actual12);
 
-        String word2 = "abcbaa";
-        boolean actual2 = false;
-        assertEquals(palindrome.isPalindrome(word2, cc), actual2);
+        String word13 = "z";
+        boolean actual13 = true;
+        assertEquals(palindrome.isPalindrome(word13, cc), actual13);
 
-        String word3 = "z";
-        boolean actual3 = true;
-        assertEquals(palindrome.isPalindrome(word3, cc), actual3);
+        String word14 = "";
+        boolean actual14 = true;
+        assertEquals(palindrome.isPalindrome(word14, cc), actual14);
 
-        String word4 = "";
-        boolean actual4 = true;
-        assertEquals(palindrome.isPalindrome(word4, cc), actual4);
-    }*/
+
+        CharacterComparator ccN = new OffByN(5);
+
+        assertEquals(palindrome.isPalindrome("abcqcba", ccN), false);
+        assertEquals(palindrome.isPalindrome("azdxd", ccN), true);
+        assertEquals(palindrome.isPalindrome("abcqqcba", ccN), false);
+        assertEquals(palindrome.isPalindrome("ehjc", ccN), true);
+
+    }
 }

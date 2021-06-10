@@ -64,9 +64,9 @@ public class TestPalindrome {
         CharacterComparator ccN = new OffByN(5);
 
         assertEquals(palindrome.isPalindrome("abcqcba", ccN), false);
-        assertEquals(palindrome.isPalindrome("azdxd", ccN), true);
-        assertEquals(palindrome.isPalindrome("abcqqcba", ccN), false);
-        assertEquals(palindrome.isPalindrome("ehjc", ccN), true);
+        assertEquals(palindrome.isPalindrome("abchgf", ccN), true);
+        assertEquals(palindrome.isPalindrome("aa", ccN), false);
+        assertEquals(palindrome.isPalindrome("", ccN), true);
 
     }
 }

@@ -30,12 +30,12 @@ public class TestArrayDequeGold {
                 actual = sDeque.removeLast();
                 expected = aDeque.removeLast();
                 message += "removeLast()\n";
-                assertEquals(message,expected, actual);
+                assertEquals(message, expected, actual);
             } else {
                 actual = sDeque.removeFirst();
                 expected = aDeque.removeFirst();
                 message += "removeFirst()\n";
-                assertEquals(message,expected, actual);
+                assertEquals(message, expected, actual);
             }
         }
     }

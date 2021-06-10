@@ -9,6 +9,9 @@ public class TestArrayDequeGold {
         ArrayDequeSolution<Integer> aDeque = new ArrayDequeSolution<>();
 
         String message = "";
+        message += "isEmpty()\n";
+        assertEquals(message, aDeque.isEmpty(), sDeque.isEmpty());
+
         for (int i = 0; i < 10; i += 1) {
             double numberBetweenZeroAndOne = StdRandom.uniform();
 
@@ -21,7 +24,13 @@ public class TestArrayDequeGold {
                 aDeque.addFirst(i);
                 message += "addFirst(" + i + ")\n";
             }
+
+            message += "size()\n";
+            assertEquals(message, aDeque.size(), sDeque.size());
         }
+
+        message += "isEmpty()\n";
+        assertEquals(message, aDeque.isEmpty(), sDeque.isEmpty());
 
         for (int i = 0; i < 10; i += 1) {
             double numberBetweenZeroAndOne = StdRandom.uniform();
@@ -37,6 +46,8 @@ public class TestArrayDequeGold {
                 message += "removeFirst()\n";
                 assertEquals(message, expected, actual);
             }
+            message += "size()\n";
+            assertEquals(message, aDeque.size(), sDeque.size());
         }
     }
     public static void main(String[] args) {

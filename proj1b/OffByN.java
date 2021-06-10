@@ -1,5 +1,5 @@
 public class OffByN implements CharacterComparator {
-    private int n;
+    private int n = 0;
     public OffByN(int i) {
         if (i >= 0) {
             n = i;
@@ -9,7 +9,7 @@ public class OffByN implements CharacterComparator {
     public boolean equalChars(char x, char y) {
         int a = x;
         int b = y;
-        if (b - a > 0 && b - a <= n || a - b > 0 && a - b <= n) {
+        if (b - a == n || b - a == -n) {
             return true;
         }
         return false;

@@ -7,13 +7,13 @@ public class TestOffByN {
 
     @Test
     public void testOffByN() {
-        CharacterComparator offByN = new OffByN(5);
-
-        assertEquals(true, offByN.equalChars('a', 'b'));
+        CharacterComparator offByN = new OffByN(-5);
+        offByN = new OffByN(5);
         assertEquals(true, offByN.equalChars('a', 'f'));
-        assertEquals(false, offByN.equalChars('z', 'r'));
-        assertEquals(false, offByN.equalChars('a', 'a'));
-        assertEquals(true, offByN.equalChars('%', '&'));
+        assertEquals(true, offByN.equalChars('f', 'a'));
+        assertEquals(false, offByN.equalChars('f', 'h'));
+        assertEquals(false, offByN.equalChars('A', 'f'));
+        assertEquals(false, offByN.equalChars('%', '&'));
 
     }
 }

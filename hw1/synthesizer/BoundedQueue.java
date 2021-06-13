@@ -11,7 +11,7 @@ public interface BoundedQueue<T> extends Iterable<T> {
 
     // is the buffer empty (fillCount equals zero)?
     default boolean isEmpty() {
-        if (this.capacity() == 0) {
+        if (this.fillCount() == 0) {
             return true;
         }
         return false;

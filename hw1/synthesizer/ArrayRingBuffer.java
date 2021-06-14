@@ -82,7 +82,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         private int wizPos;
 
         ARBIterator() {
-            wizPos = first;
+            wizPos = 0;
         }
 
         public boolean hasNext() {
@@ -90,12 +90,13 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         }
 
         public T next() {
-            T returnItem = rb[wizPos];
-            if (wizPos == capacity - 1) {
-                wizPos = 0;
+            T returnItem;
+            if (wizPos + first < capacity) {
+                returnItem = rb[wizPos + first];
             } else {
-                wizPos += 1;
+                returnItem = rb[wizPos + first - capacity];
             }
+            wizPos += 1;
             return returnItem;
         }
     }

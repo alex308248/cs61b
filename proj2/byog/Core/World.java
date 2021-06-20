@@ -32,8 +32,6 @@ public class World implements Serializable {
             }
         }
 
-        System.out.println(roomNum);
-
         for (int i = 0; i < roomNum; i += 1) {
             addRandomRoom();
         }

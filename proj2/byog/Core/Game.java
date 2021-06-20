@@ -22,7 +22,6 @@ public class Game {
      */
     public void playWithKeyboard() {
         drawStartPicture();
-        //int seed = getSeed();
         World world = null;
 
         while (true) {
@@ -121,7 +120,7 @@ public class Game {
         for (int i = num; i < input.length(); i++) {
             char c = input.charAt(i);
             if (c == 's') {
-                saveWorld(world);
+                //saveWorld(world);
                 return world.getWorld();
             }
         }
@@ -207,14 +206,11 @@ public class Game {
     private static void saveWorld(World w) {
         File f = new File("./GAME.ser");
         try {
-            /*
+
             if (!f.exists()) {
                 f.createNewFile();
             }
-            */
 
-            f.createNewFile();
-            
             FileOutputStream fs = new FileOutputStream(f);
             ObjectOutputStream os = new ObjectOutputStream(fs);
             os.writeObject(w);

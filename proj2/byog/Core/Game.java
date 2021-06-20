@@ -86,10 +86,10 @@ public class Game {
             char c = input.charAt(i);
             switch (c) {
                 case 'l':
-                    world = loadFile();
+                    //world = loadFile();
                     break;
                 case 'L':
-                    world = loadFile();
+                    //world = loadFile();
                     break;
                 case 'n':
                     seedReturnArr = getInputSeed(input);
@@ -207,9 +207,14 @@ public class Game {
     private static void saveWorld(World w) {
         File f = new File("./GAME.ser");
         try {
+            /*
             if (!f.exists()) {
                 f.createNewFile();
             }
+            */
+
+            f.createNewFile();
+            
             FileOutputStream fs = new FileOutputStream(f);
             ObjectOutputStream os = new ObjectOutputStream(fs);
             os.writeObject(w);

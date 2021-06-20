@@ -94,6 +94,7 @@ public class Game {
                     seedReturnArr = getInputSeed(input);
                     seed = seedReturnArr[0];
                     num  = seedReturnArr[1];
+                    System.out.println(seed);
                     world = new World(seed, WIDTH, HEIGHT);
                     break;
                 case 'N':
@@ -231,7 +232,7 @@ public class Game {
             if (c >= 48 && c <= 57) {
                 ret[0] = ret[0] * 10 + (c - 48);
             } else {
-                break;
+                continue;
             }
             ret[1] = i;
         }

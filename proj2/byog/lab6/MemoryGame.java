@@ -63,7 +63,7 @@ public class MemoryGame {
     public void drawFrame(String s, int round) {
         //TOD0: Take the string and display it in the center of the screen
         System.out.println(s);
-        StdDraw.setCanvasSize(this.width * 16, this.height * 16);
+        //StdDraw.setCanvasSize(this.width * 16, this.height * 16);
         StdDraw.clear(Color.BLACK);
         Font font = new Font("Monaco", Font.BOLD, 30);
         StdDraw.setFont(font);

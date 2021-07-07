@@ -4,6 +4,7 @@ import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import edu.princeton.cs.introcs.StdDraw;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -42,23 +43,11 @@ public class Game {
                         world = createWorld();
                         break;
                 }
-                drawGamePicture(world);
                 break;
             }
         }
 
-        while (true) {
-            if (StdDraw.hasNextKeyTyped()) {
-                char c = StdDraw.nextKeyTyped();
-                if (c == 's') {
-                    saveWorld(world);
-                    System.exit(0);
-                    return;
-                }
-
-            }
-        }
-
+        startGame(world);
     }
 
     /**
@@ -141,10 +130,14 @@ public class Game {
         StdDraw.show();
     }
 
-    public void drawGamePicture(World world) {
-        TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH, HEIGHT);
-        world.draw(ter);
+    public void drawFrame(String s) {
+        //TOD0: Take the string and display it in the center of the screen
+        StdDraw.enableDoubleBuffering();
+        StdDraw.clear(Color.BLACK);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.text(0.5 * WIDTH, 0.5 * HEIGHT, s);
+
+        StdDraw.show();
     }
 
     private World loadFile() {
@@ -237,5 +230,19 @@ public class Game {
             ret[1] = i;
         }
         return ret;
+    }
+
+    private void startGame(World world){
+        TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);
+        while (true) {
+            if (world.checkOutOfMaze()) {
+                drawFrame("You Win!");
+                break;
+            } else if (StdDraw.hasNextKeyTyped()) {
+                world.characterMove(StdDraw.nextKeyTyped());
+            }
+            world.draw(ter);
+        }
     }
 }

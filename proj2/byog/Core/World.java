@@ -16,6 +16,9 @@ public class World implements Serializable {
     private static int HEIGHT;
     private TETile[][] world;
     private static final long serialVersionUID = 123123123123123L;
+    private int[] character = {0, 0};
+    private int[] door = {0, 0};
+
 
     public World(Integer seed, Integer w, Integer h) {
         WIDTH = w;
@@ -24,7 +27,7 @@ public class World implements Serializable {
         r = new Random(seed);
         rectangles = new ArrayList<Rectangle>();
 
-        int roomNum = RandomUtils.uniform(r, 20, 30);
+        int roomNum = RandomUtils.uniform(r, 30, 50);
 
         for (int x = 0; x < WIDTH; x += 1) {
             for (int y = 0; y < HEIGHT; y += 1) {
@@ -38,6 +41,27 @@ public class World implements Serializable {
         addHallways();
         addWall();
         addDoor();
+        addCharacter();
+    }
+
+    public boolean checkOutOfMaze() {
+        if (character[0] == door[0] && character[1] == door[1]) {
+            return true;
+        }
+        return false;
+    }
+
+    private void addCharacter() {
+        int x = RandomUtils.uniform(r, 0, WIDTH - 1);
+        int y = RandomUtils.uniform(r, 0, HEIGHT - 1);
+
+        if (world[x][y] == Tileset.WOOD) {
+            world[x][y] = Tileset.HERO;
+            character[0] = x;
+            character[1] = y;
+            return;
+        }
+        addCharacter();
     }
 
     private void addRandomRoom() {
@@ -101,6 +125,8 @@ public class World implements Serializable {
             return;
         }
         world[x][y] = Tileset.LOCKED_DOOR;
+        door[0] = x;
+        door[1] = y;
     }
 
     private boolean checkPosition(Rectangle rec) {
@@ -110,6 +136,14 @@ public class World implements Serializable {
             }
         }
         return false;
+    }
+
+    public void draw(TERenderer ter) {
+        ter.renderFrame(world);
+    }
+
+    public TETile[][] getWorld() {
+        return world;
     }
 
     private void connectTwoRectangle(Rectangle r1, Rectangle r2) {
@@ -140,11 +174,78 @@ public class World implements Serializable {
         }
     }
 
-    public void draw(TERenderer ter) {
-        ter.renderFrame(world);
+    private void connectTwoRectangle2(Rectangle r1, Rectangle r2) {
+        int x1 = r1.getPosX();
+        int y1 = r1.getPosY();
+        int x2 = r2.getPosX();
+        int y2 = r2.getPosY();
+        int checkPositiveX;
+        int checkPositiveY;
+        //System.out.println("x1:"+x1 + " y1:"+ y1+ " x2:"+ x2 + " y2:"+ y2);
+
+        if (x1 < x2) {
+            checkPositiveX = 1;
+        } else {
+            checkPositiveX = -1;
+        }
+
+        if (y1 < y2) {
+            checkPositiveY = 1;
+        } else {
+            checkPositiveY = -1;
+        }
+
+        boolean exchange = true;
+        while (x1 != x2 && y1 != y2) {
+            if(exchange) {
+                x1 += checkPositiveX;
+                world[x1][y1] = Tileset.WOOD;
+                exchange = false;
+            } else {
+                y1 += checkPositiveY;
+                world[x1][y1] = Tileset.WOOD;
+                exchange = true;
+            }
+        }
+        if(x1 == x2) {
+            for (int i = y1; i != y2; i += checkPositiveY) {
+                world[x1][i] = Tileset.WOOD;
+            }
+            return;
+        } else if (y1 == y2) {
+            for (int i = x1; i != x2; i += checkPositiveX) {
+                world[i][y1] = Tileset.WOOD;
+            }
+            return;
+        }
     }
 
-    public TETile[][] getWorld() {
-        return world;
+    void characterMove(char c) {
+        int x = character[0], y = character[1];
+        if (c == 'w' || c == 'W') {
+            if (world[x][y + 1] == Tileset.WOOD || world[x][y + 1] == Tileset.LOCKED_DOOR) {
+                world[x][y] = Tileset.WOOD;
+                world[x][y + 1] = Tileset.HERO;
+                character[1] += 1;
+            }
+        } else if (c == 'a' || c == 'A') {
+            if (world[x - 1][y] == Tileset.WOOD || world[x - 1][y] == Tileset.LOCKED_DOOR) {
+                world[x][y] = Tileset.WOOD;
+                world[x - 1][y] = Tileset.HERO;
+                character[0] -= 1;
+            }
+        } else if (c == 's' || c == 'S') {
+            if (world[x][y - 1] == Tileset.WOOD || world[x][y - 1] == Tileset.LOCKED_DOOR) {
+                world[x][y] = Tileset.WOOD;
+                world[x][y - 1] = Tileset.HERO;
+                character[1] -= 1;
+            }
+        } else if (c == 'd' || c == 'D') {
+            if (world[x + 1][y] == Tileset.WOOD || world[x + 1][y] == Tileset.LOCKED_DOOR) {
+                world[x][y] = Tileset.WOOD;
+                world[x + 1][y] = Tileset.HERO;
+                character[0] += 1;
+            }
+        }
     }
 }

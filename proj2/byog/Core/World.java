@@ -220,32 +220,36 @@ public class World implements Serializable {
         }
     }
 
-    void characterMove(char c) {
+    public void characterMove(char c) {
         int x = character[0], y = character[1];
         if (c == 'w' || c == 'W') {
-            if (world[x][y + 1] == Tileset.WOOD || world[x][y + 1] == Tileset.LOCKED_DOOR) {
+            if (world[x][y + 1].equals(Tileset.WOOD) || world[x][y + 1].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x][y + 1] = Tileset.HERO;
                 character[1] += 1;
             }
         } else if (c == 'a' || c == 'A') {
-            if (world[x - 1][y] == Tileset.WOOD || world[x - 1][y] == Tileset.LOCKED_DOOR) {
+            if (world[x - 1][y].equals(Tileset.WOOD) || world[x - 1][y].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x - 1][y] = Tileset.HERO;
                 character[0] -= 1;
             }
         } else if (c == 's' || c == 'S') {
-            if (world[x][y - 1] == Tileset.WOOD || world[x][y - 1] == Tileset.LOCKED_DOOR) {
+            if (world[x][y - 1].equals(Tileset.WOOD) || world[x][y - 1].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x][y - 1] = Tileset.HERO;
                 character[1] -= 1;
             }
         } else if (c == 'd' || c == 'D') {
-            if (world[x + 1][y] == Tileset.WOOD || world[x + 1][y] == Tileset.LOCKED_DOOR) {
+            if (world[x + 1][y].equals(Tileset.WOOD) || world[x + 1][y].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x + 1][y] = Tileset.HERO;
                 character[0] += 1;
             }
         }
+    }
+
+    public String mouseInfo(int x, int y) {
+            return world[x][y].description();
     }
 }

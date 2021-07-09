@@ -28,6 +28,7 @@ public class Game {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char c = StdDraw.nextKeyTyped();
+                System.out.println(c);
                 switch (c) {
                     case 'l':
                         world = loadFile();
@@ -74,10 +75,10 @@ public class Game {
             char c = input.charAt(i);
             switch (c) {
                 case 'l':
-                    //world = loadFile();
+                    world = loadFile();
                     break;
                 case 'L':
-                    //world = loadFile();
+                    world = loadFile();
                     break;
                 case 'n':
                     seedReturnArr = getInputSeed(input);
@@ -109,8 +110,8 @@ public class Game {
 
         for (int i = num; i < input.length(); i++) {
             char c = input.charAt(i);
-            if (c == 's') {
-                //saveWorld(world);
+            if (c == 'q' || c == 'Q') {
+                saveWorld(world);
                 return world.getWorld();
             }
         }
@@ -180,7 +181,7 @@ public class Game {
                     seed = seed * 10 + (c - 48);
                 } else if (c == '\b') {
                     seed /= 10;
-                } else if (c == '\n') {
+                } else if (c == 'S' || c == 's') {
                     break;
                 } else if (c == 'q') {
                     System.exit(0);
@@ -233,14 +234,33 @@ public class Game {
     }
 
     private void startGame(World world){
+        System.out.println("Game Start");
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
         while (true) {
+            //TODO: mouse
+            /*
+            if (StdDraw.isMousePressed()) {
+                double x = StdDraw.mouseX();
+                double y = StdDraw.mouseY();
+                System.out.println(world.);
+            }*/
+
+
             if (world.checkOutOfMaze()) {
                 drawFrame("You Win!");
+                while (!StdDraw.hasNextKeyTyped()) {
+                }
+                System.exit(0);
                 break;
             } else if (StdDraw.hasNextKeyTyped()) {
-                world.characterMove(StdDraw.nextKeyTyped());
+                char c = StdDraw.nextKeyTyped();
+                if(c == 'q' || c == 'Q') {
+                    saveWorld(world);
+                    System.exit(0);
+                    break;
+                }
+                world.characterMove(c);
             }
             world.draw(ter);
         }

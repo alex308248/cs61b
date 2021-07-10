@@ -93,10 +93,10 @@ public class Game {
                     num  = seedReturnArr[1];
                     world = new World(seed, WIDTH, HEIGHT);
                     break;
-                case 'q':
-                    return null;
-                case 'Q':
-                    return null;
+                //case 'q':
+                //    return null;
+                //case 'Q':
+                //    return null;
                 default:
                     seedReturnArr = getInputSeed(input);
                     seed = seedReturnArr[0];
@@ -143,7 +143,7 @@ public class Game {
     }
 
     private World loadFile() {
-        File f = new File("./GAME.ser");
+        File f = new File("GAME.ser");
         if (f.exists()) {
             try {
                 FileInputStream fs = new FileInputStream(f);

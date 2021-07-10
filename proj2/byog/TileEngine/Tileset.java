@@ -34,12 +34,12 @@ public class Tileset {
     public static final TETile MOUNTAIN = new TETile('▲', Color.gray, Color.black, "mountain");
     public static final TETile TREE = new TETile('♠', Color.green, Color.black, "tree");
 
-    public static final TETile HERO = new TETile('H', Color.black, Color.white,
+    public static final TETile HERO = new TETile('@', Color.black, Color.white,
             "hero", "./byog/TileEngine/TileData/hero.png");
-    public static final TETile ROCK = new TETile('W', Color.black, Color.darkGray,
-            "rock", "./byog/TileEngine/TileData/rock.png");
-    public static final TETile WOOD = new TETile('F', Color.black, Color.darkGray,
-            "wood", "./byog/TileEngine/TileData/wood.png");
+    public static final TETile ROCK = new TETile('#', Color.black, Color.darkGray,
+            "rock wall", "./byog/TileEngine/TileData/rock.png");
+    public static final TETile WOOD = new TETile('·', Color.black, Color.darkGray,
+            "wood floor", "./byog/TileEngine/TileData/wood.png");
 
 }
 

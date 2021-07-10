@@ -108,12 +108,15 @@ public class Game {
             break;
         }
 
+        char buffer = '0';
         for (int i = num; i < input.length(); i++) {
             char c = input.charAt(i);
-            if (c == 'q' || c == 'Q') {
+            if (buffer == ':' && c == 'Q') {
                 saveWorld(world);
                 return world.getWorld();
             }
+            world.characterMove(c);
+            buffer = c;
         }
 
         TETile[][] finalWorldFrame = world.getWorld();
@@ -131,13 +134,11 @@ public class Game {
         StdDraw.show();
     }
 
-    public void drawFrame(String s) {
+    private void drawText(String s, double x, double y) {
         //TOD0: Take the string and display it in the center of the screen
         StdDraw.enableDoubleBuffering();
-        StdDraw.clear(Color.BLACK);
         StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.text(0.5 * WIDTH, 0.5 * HEIGHT, s);
-
+        StdDraw.text(x, y, s);
         StdDraw.show();
     }
 
@@ -230,6 +231,7 @@ public class Game {
             }
             ret[1] = i;
         }
+        ret[1] += 1;
         return ret;
     }
 
@@ -237,18 +239,20 @@ public class Game {
         System.out.println("Game Start");
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
+        world.draw(ter);
         while (true) {
             //TODO: mouse
-            /*
+
             if (StdDraw.isMousePressed()) {
                 double x = StdDraw.mouseX();
                 double y = StdDraw.mouseY();
-                System.out.println(world.);
-            }*/
-
+                world.draw(ter);
+                drawText(world.mouseInfo((int) x, (int) y), 3, 0.95 * HEIGHT);
+            }
 
             if (world.checkOutOfMaze()) {
-                drawFrame("You Win!");
+                StdDraw.clear(Color.BLACK);
+                drawText("You Win!", 0.5 * WIDTH, 0.5 * HEIGHT);
                 while (!StdDraw.hasNextKeyTyped()) {
                 }
                 System.exit(0);
@@ -261,8 +265,8 @@ public class Game {
                     break;
                 }
                 world.characterMove(c);
+                world.draw(ter);
             }
-            world.draw(ter);
         }
     }
 }

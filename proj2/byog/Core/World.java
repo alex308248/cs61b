@@ -67,13 +67,13 @@ public class World implements Serializable {
     private void addRandomRoom() {
         int width = RandomUtils.uniform(r, 3, 6);
         int height = RandomUtils.uniform(r, 3, 6);
-        int posX = RandomUtils.uniform(r, 2, WIDTH - width);
-        int posY = RandomUtils.uniform(r, 2, HEIGHT - height);
+        int posX = RandomUtils.uniform(r, 4, WIDTH - width);
+        int posY = RandomUtils.uniform(r, 4, HEIGHT - height);
         Rectangle newRectangle = new Rectangle(width, height, posX, posY);
 
         //If the position is overlapped, build a new rectangle
         if (checkPosition(newRectangle)
-                || posX + width >= WIDTH - 1 || posY + height >= HEIGHT - 1) {
+                || posX + width >= WIDTH - 4 || posY + height >= HEIGHT - 4) {
             addRandomRoom();
             return;
         }

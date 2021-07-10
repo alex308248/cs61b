@@ -226,7 +226,7 @@ public class Game {
             char c = input.charAt(i);
             if (c >= 48 && c <= 57) {
                 ret[0] = ret[0] * 10 + (c - 48);
-            } else if(c == 'S') {
+            } else if (c == 'S') {
                 ret[1] = i;
                 break;
             } else {

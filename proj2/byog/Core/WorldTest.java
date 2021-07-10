@@ -2,7 +2,7 @@ package byog.Core;
 
 public class WorldTest {
     public static void main(String[] args) {
-        World w = new World(12345678,80,30);
+        World w = new World(12345678, 80, 30);
 
         /*
         StdDraw.enableDoubleBuffering();

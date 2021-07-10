@@ -99,7 +99,7 @@ public class TERenderer {
         StdDraw.show();
     }
 
-    //TODO: a light system to show the 3*3 region out of character
+
     public void renderFrameLight(TETile[][] world, int size, int idx, int idy) {
         int numXTiles = world.length;
         int numYTiles = world[0].length;

@@ -139,8 +139,8 @@ public class World implements Serializable {
     }
 
     public void draw(TERenderer ter) {
-        //ter.renderFrame(world);
-        ter.renderFrameLight(world, lightSize, character[0], character[1]);
+        ter.renderFrame(world);
+        //ter.renderFrameLight(world, lightSize, character[0], character[1]);
     }
 
     public TETile[][] getWorld() {
@@ -255,7 +255,8 @@ public class World implements Serializable {
     }
 
     public String mouseInfo(int x, int y) {
-        if (Math.abs(x - character[0]) < lightSize + 1 && Math.abs(y - character[1]) < lightSize + 1) {
+        if (Math.abs(x - character[0]) < lightSize + 1
+                && Math.abs(y - character[1]) < lightSize + 1) {
             return world[x][y].description();
         } else {
             return "nothing";

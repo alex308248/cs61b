@@ -18,7 +18,7 @@ public class World implements Serializable {
     private static final long serialVersionUID = 123123123123123L;
     private int[] character = {0, 0};
     private int[] door = {0, 0};
-
+    private int lightSize = 2;
 
     public World(Integer seed, Integer w, Integer h) {
         WIDTH = w;
@@ -139,7 +139,8 @@ public class World implements Serializable {
     }
 
     public void draw(TERenderer ter) {
-        ter.renderFrame(world);
+        //ter.renderFrame(world);
+        ter.renderFrameLight(world, lightSize, character[0], character[1]);
     }
 
     public TETile[][] getWorld() {
@@ -197,7 +198,7 @@ public class World implements Serializable {
 
         boolean exchange = true;
         while (x1 != x2 && y1 != y2) {
-            if(exchange) {
+            if (exchange) {
                 x1 += checkPositiveX;
                 world[x1][y1] = Tileset.WOOD;
                 exchange = false;
@@ -207,7 +208,7 @@ public class World implements Serializable {
                 exchange = true;
             }
         }
-        if(x1 == x2) {
+        if (x1 == x2) {
             for (int i = y1; i != y2; i += checkPositiveY) {
                 world[x1][i] = Tileset.WOOD;
             }
@@ -223,25 +224,29 @@ public class World implements Serializable {
     public void characterMove(char c) {
         int x = character[0], y = character[1];
         if (c == 'w' || c == 'W') {
-            if (world[x][y + 1].equals(Tileset.WOOD) || world[x][y + 1].equals(Tileset.LOCKED_DOOR)) {
+            if (world[x][y + 1].equals(Tileset.WOOD)
+                    || world[x][y + 1].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x][y + 1] = Tileset.HERO;
                 character[1] += 1;
             }
         } else if (c == 'a' || c == 'A') {
-            if (world[x - 1][y].equals(Tileset.WOOD) || world[x - 1][y].equals(Tileset.LOCKED_DOOR)) {
+            if (world[x - 1][y].equals(Tileset.WOOD)
+                    || world[x - 1][y].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x - 1][y] = Tileset.HERO;
                 character[0] -= 1;
             }
         } else if (c == 's' || c == 'S') {
-            if (world[x][y - 1].equals(Tileset.WOOD) || world[x][y - 1].equals(Tileset.LOCKED_DOOR)) {
+            if (world[x][y - 1].equals(Tileset.WOOD)
+                    || world[x][y - 1].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x][y - 1] = Tileset.HERO;
                 character[1] -= 1;
             }
         } else if (c == 'd' || c == 'D') {
-            if (world[x + 1][y].equals(Tileset.WOOD) || world[x + 1][y].equals(Tileset.LOCKED_DOOR)) {
+            if (world[x + 1][y].equals(Tileset.WOOD)
+                    || world[x + 1][y].equals(Tileset.LOCKED_DOOR)) {
                 world[x][y] = Tileset.WOOD;
                 world[x + 1][y] = Tileset.HERO;
                 character[0] += 1;
@@ -250,6 +255,10 @@ public class World implements Serializable {
     }
 
     public String mouseInfo(int x, int y) {
+        if (Math.abs(x - character[0]) < lightSize + 1 && Math.abs(y - character[1]) < lightSize + 1) {
             return world[x][y].description();
+        } else {
+            return "nothing";
+        }
     }
 }

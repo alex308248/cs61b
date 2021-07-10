@@ -98,4 +98,21 @@ public class TERenderer {
         }
         StdDraw.show();
     }
+
+    //TODO: a light system to show the 3*3 region out of character
+    public void renderFrameLight(TETile[][] world, int size, int idx, int idy) {
+        int numXTiles = world.length;
+        int numYTiles = world[0].length;
+        StdDraw.clear(new Color(0, 0, 0));
+        for (int x = idx - size; x <= idx + size; x += 1) {
+            for (int y = idy - size; y <= idy + size; y += 1) {
+                if (world[x][y] == null) {
+                    throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y
+                            + " is null.");
+                }
+                world[x][y].draw(x + xOffset, y + yOffset);
+            }
+        }
+        StdDraw.show();
+    }
 }

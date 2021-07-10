@@ -4,7 +4,7 @@ import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import edu.princeton.cs.introcs.StdDraw;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -226,22 +226,23 @@ public class Game {
             char c = input.charAt(i);
             if (c >= 48 && c <= 57) {
                 ret[0] = ret[0] * 10 + (c - 48);
+            } else if(c == 'S') {
+                ret[1] = i;
+                break;
             } else {
                 continue;
             }
-            ret[1] = i;
         }
-        ret[1] += 1;
         return ret;
     }
 
-    private void startGame(World world){
+    private void startGame(World world) {
         System.out.println("Game Start");
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
         world.draw(ter);
+        char buffer = '-';
         while (true) {
-            //TODO: mouse
 
             if (StdDraw.isMousePressed()) {
                 double x = StdDraw.mouseX();
@@ -253,19 +254,23 @@ public class Game {
             if (world.checkOutOfMaze()) {
                 StdDraw.clear(Color.BLACK);
                 drawText("You Win!", 0.5 * WIDTH, 0.5 * HEIGHT);
-                while (!StdDraw.hasNextKeyTyped()) {
+                while (true) {
+                    if (StdDraw.hasNextKeyTyped()) {
+                        break;
+                    }
                 }
                 System.exit(0);
                 break;
             } else if (StdDraw.hasNextKeyTyped()) {
                 char c = StdDraw.nextKeyTyped();
-                if(c == 'q' || c == 'Q') {
+                if (buffer == ':' && c == 'q' || buffer == ':' && c == 'Q') {
                     saveWorld(world);
                     System.exit(0);
                     break;
                 }
                 world.characterMove(c);
                 world.draw(ter);
+                buffer = c;
             }
         }
     }

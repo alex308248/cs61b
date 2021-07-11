@@ -175,8 +175,8 @@ public class World implements Serializable {
     // the upper one is for showing the whole world,
     // and the lower one can make more fun
     public void draw(TERenderer ter) {
-        ter.renderFrame(world);
-        //ter.renderFrameLight(world, lightSize, character[0], character[1]);
+        //ter.renderFrame(world);
+        ter.renderFrameLight(world, lightSize, character[0], character[1]);
     }
 
     // return world for playing with inputString

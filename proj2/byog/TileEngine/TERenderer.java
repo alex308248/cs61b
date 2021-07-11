@@ -110,7 +110,9 @@ public class TERenderer {
                     throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y
                             + " is null.");
                 }
-                world[x][y].draw(x + xOffset, y + yOffset);
+                if (world[x][y] != Tileset.NOTHING) {
+                    world[x][y].draw(x + xOffset, y + yOffset);
+                }
             }
         }
         StdDraw.show();

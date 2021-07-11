@@ -11,3 +11,8 @@ Assignments of the course UC Berkeley CS 61B at Spring 2018.
 * Project 1 Gold: Autograding
 * Project 2: The Game
  
+## Project 2
+![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/startFrame.PNG)
+![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/startFrameWithSeed.PNG)
+![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/Maze.PNG)
+![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/GameFrame.PNG)

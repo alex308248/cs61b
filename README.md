@@ -32,9 +32,9 @@ Press "S" after you finish entering <br>
 Use W, A, S, D for moving <br>
 Press ":Q" to save and quit the game <br>
 When the character open the yellow door, the game will end with palyer's winning <br>
-
+ <br>
 ![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/startFrame.PNG)
-The Main menu. <br>
+ <br> The Main menu. <br>
 
 ![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/Maze.PNG)
 The map of the game. <br>

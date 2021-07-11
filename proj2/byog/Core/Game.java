@@ -123,6 +123,7 @@ public class Game {
         return finalWorldFrame;
     }
 
+    // draw thw game starting frame
     private static void drawStartPicture() {
         StdDraw.enableDoubleBuffering();
         StdDraw.clear(StdDraw.BLACK);
@@ -134,6 +135,7 @@ public class Game {
         StdDraw.show();
     }
 
+    // draw text
     private void drawText(String s, double x, double y) {
         //TOD0: Take the string and display it in the center of the screen
         StdDraw.enableDoubleBuffering();
@@ -142,8 +144,10 @@ public class Game {
         StdDraw.show();
     }
 
+    // read and check whether a file is exist
+    // have error when using an autograder
     private World loadFile() {
-        File f = new File("GAME.ser");
+        File f = new File("./GAME.ser");
         if (f.exists()) {
             try {
                 FileInputStream fs = new FileInputStream(f);
@@ -165,6 +169,7 @@ public class Game {
         return createWorld();
     }
 
+    // init the game world
     private World createWorld() {
         StdDraw.text(0.5, 0.4, "Enter seed");
         StdDraw.show();
@@ -173,6 +178,7 @@ public class Game {
         return w;
     }
 
+    //get the input seed from keyboard
     private int getSeed() {
         int seed = 0;
         while (true) {
@@ -199,6 +205,7 @@ public class Game {
         return seed;
     }
 
+    // save the game to file
     private static void saveWorld(World w) {
         File f = new File("./GAME.ser");
         try {
@@ -220,6 +227,7 @@ public class Game {
         }
     }
 
+    //get input seed from input string
     private int[] getInputSeed(String input) {
         int[] ret = {0, 0};
         for (int i = 0; i < input.length(); i += 1) {
@@ -236,14 +244,15 @@ public class Game {
         return ret;
     }
 
+    //Start the Game
     private void startGame(World world) {
         System.out.println("Game Start");
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
         world.draw(ter);
         char buffer = '-';
-        while (true) {
 
+        while (true) {
             if (StdDraw.isMousePressed()) {
                 double x = StdDraw.mouseX();
                 double y = StdDraw.mouseY();

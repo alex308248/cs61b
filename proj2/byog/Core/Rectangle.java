@@ -31,6 +31,14 @@ public class Rectangle implements Serializable {
         return posX;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public int getPosY() {
         return posY;
     }

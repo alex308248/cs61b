@@ -103,7 +103,7 @@ public class TERenderer {
     public void renderFrameLight(TETile[][] world, int size, int idx, int idy) {
         int numXTiles = world.length;
         int numYTiles = world[0].length;
-        StdDraw.clear(new Color(0, 0, 0));
+        //StdDraw.clear(new Color(0, 0, 0));
         for (int x = idx - size; x <= idx + size; x += 1) {
             for (int y = idy - size; y <= idy + size; y += 1) {
                 if (world[x][y] == null) {
@@ -115,6 +115,67 @@ public class TERenderer {
                 }
             }
         }
+        StdDraw.show();
+    }
+
+    public void renderFrameLight_2(TETile[][] world, int size, int idx, int idy) {
+        int numXTiles = world.length;
+        int numYTiles = world[0].length;
+        StdDraw.clear(new Color(0, 0, 0));
+
+        int checkTop = idy +size;
+        for (int i = idx; i < idx + size; i++) {
+            if (world[i][idy] == Tileset.NOTHING) {
+                break;
+            }
+            for (int j = idy; j < checkTop; j++) {
+                if (world[i][j] == Tileset.NOTHING) {
+                    checkTop = j;
+                    break;
+                }
+                world[i][j].draw(i + xOffset, j + yOffset);
+            }
+        }
+        checkTop = idy +size;
+        for (int i = idx; i >= idx - size; i--) {
+            if (world[i][idy] == Tileset.NOTHING) {
+                break;
+            }
+            for (int j = idy; j < checkTop; j++) {
+                if (world[i][j] == Tileset.NOTHING) {
+                    checkTop = j;
+                    break;
+                }
+                world[i][j].draw(i + xOffset, j + yOffset);
+            }
+        }
+        int checkDown = idy - size;
+        for (int i = idx; i < idx + size; i++) {
+            if (world[i][idy] == Tileset.NOTHING) {
+                break;
+            }
+            for (int j = idy; j > checkDown; j--) {
+                if (world[i][j] == Tileset.NOTHING) {
+                    checkDown = j;
+                    break;
+                }
+                world[i][j].draw(i + xOffset, j + yOffset);
+            }
+        }
+        checkDown = idy - size;
+        for (int i = idx; i >= idx - size; i--) {
+            if (world[i][idy] == Tileset.NOTHING) {
+                break;
+            }
+            for (int j = idy; j > checkDown; j--) {
+                if (world[i][j] == Tileset.NOTHING) {
+                    checkDown = j;
+                    break;
+                }
+                world[i][j].draw(i + xOffset, j + yOffset);
+            }
+        }
+
         StdDraw.show();
     }
 }

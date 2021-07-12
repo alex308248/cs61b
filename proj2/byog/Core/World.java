@@ -19,7 +19,7 @@ public class World implements Serializable {
     private int[] character = {0, 0};
     private int[] door = {0, 0};
     private boolean[][] w_B;
-    private int lightSize = 3;
+    private int lightSize = 4;
 
     public World(Integer seed, Integer w, Integer h) {
         WIDTH = w;
@@ -176,7 +176,8 @@ public class World implements Serializable {
     // and the lower one can make more fun
     public void draw(TERenderer ter) {
         //ter.renderFrame(world);
-        ter.renderFrameLight(world, lightSize, character[0], character[1]);
+        //ter.renderFrameLight(world, lightSize, character[0], character[1]);
+        ter.renderFrameLight_2(world, 20, character[0], character[1]);
     }
 
     // return world for playing with inputString

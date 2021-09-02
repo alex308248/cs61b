@@ -39,5 +39,5 @@ When the character open the yellow door, the game will end with palyer's winning
 ![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/Maze.PNG)
 <br> The map of the game. <br>
 
-![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/GameFrame.PNG)
-<br> What the player will see in game. <br>
+![image](https://github.com/alex308248/cs61b/blob/master/proj2/picture/gameGIF.gif)
+<br> How to play the game. <br>
